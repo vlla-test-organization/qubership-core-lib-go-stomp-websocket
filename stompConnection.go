@@ -15,15 +15,9 @@ import (
 
 var logger = logging.GetLogger("stomp")
 
-type WebSocketConn interface {
-	ReadMessage() (messageType int, p []byte, err error)
-	WriteMessage(messageType int, data []byte) error
-	Close() error
-}
-
 type StompClient struct {
 	webSocketURL url.URL
-	connection   WebSocketConn
+	connection   *websocket.Conn
 	readCh       chan *Frame
 	writeCh      chan writeRequest
 }
@@ -34,7 +28,7 @@ type writeRequest struct {
 }
 
 type ConnectionDialer interface {
-	Dial(webSocketURL url.URL, dialer websocket.Dialer, requestHeaders http.Header) (WebSocketConn, *http.Response, error)
+	Dial(webSocketURL url.URL, dialer websocket.Dialer, requestHeaders http.Header) (*websocket.Conn, *http.Response, error)
 }
 
 func Connect(webSocketURL url.URL, dialer websocket.Dialer, requestHeaders http.Header, connDialer ConnectionDialer) (*StompClient, error) {
@@ -66,7 +60,7 @@ func ConnectWithToken(webSocketURL url.URL, dialer websocket.Dialer, token strin
 	return establishConnection(webSocketURL, conn)
 }
 
-func establishConnection(webSocketURL url.URL, conn WebSocketConn) (*StompClient, error) {
+func establishConnection(webSocketURL url.URL, conn *websocket.Conn) (*StompClient, error) {
 	readCh := make(chan *Frame)
 	writeCh := make(chan writeRequest)
 	stompClient := &StompClient{
