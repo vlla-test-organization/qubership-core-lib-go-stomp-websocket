@@ -4,12 +4,6 @@
 [![vulnerabilities](https://sonarcloud.io/api/project_badges/measure?metric=vulnerabilities&project=Netcracker_qubership-core-lib-go-stomp-websocket)](https://sonarcloud.io/summary/overall?id=Netcracker_qubership-core-lib-go-stomp-websocket)
 [![bugs](https://sonarcloud.io/api/project_badges/measure?metric=bugs&project=Netcracker_qubership-core-lib-go-stomp-websocket)](https://sonarcloud.io/summary/overall?id=Netcracker_qubership-core-lib-go-stomp-websocket)
 [![code_smells](https://sonarcloud.io/api/project_badges/measure?metric=code_smells&project=Netcracker_qubership-core-lib-go-stomp-websocket)](https://sonarcloud.io/summary/overall?id=Netcracker_qubership-core-lib-go-stomp-websocket)
-[![Go build](https://github.com/Netcracker/qubership-core-lib-go-stomp-websocket/actions/workflows/go-build.yml/badge.svg)](https://github.com/Netcracker/qubership-core-lib-go-stomp-websocket/actions/workflows/go-build.yml)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?metric=coverage\&project=Netcracker_qubership-core-lib-go-stomp-websocket)](https://sonarcloud.io/summary/overall?id=Netcracker_qubership-core-lib-go-stomp-websocket)
-[![duplicated\_lines\_density](https://sonarcloud.io/api/project_badges/measure?metric=duplicated_lines_density\&project=Netcracker_qubership-core-lib-go-stomp-websocket)](https://sonarcloud.io/summary/overall?id=Netcracker_qubership-core-lib-go-stomp-websocket)
-[![vulnerabilities](https://sonarcloud.io/api/project_badges/measure?metric=vulnerabilities\&project=Netcracker_qubership-core-lib-go-stomp-websocket)](https://sonarcloud.io/summary/overall?id=Netcracker_qubership-core-lib-go-stomp-websocket)
-[![bugs](https://sonarcloud.io/api/project_badges/measure?metric=bugs\&project=Netcracker_qubership-core-lib-go-stomp-websocket)](https://sonarcloud.io/summary/overall?id=Netcracker_qubership-core-lib-go-stomp-websocket)
-[![code\_smells](https://sonarcloud.io/api/project_badges/measure?metric=code_smells\&project=Netcracker_qubership-core-lib-go-stomp-websocket)](https://sonarcloud.io/summary/overall?id=Netcracker_qubership-core-lib-go-stomp-websocket)
 
 # go-stomp-websocket
 
