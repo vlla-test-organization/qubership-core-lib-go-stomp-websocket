@@ -7,63 +7,72 @@
 
 # go-stomp-websocket
 
-Golang имплементация STOMP-клиента поверх websocket
+Golang implementation of a STOMP client over WebSocket.
 
-#### Поддержаны операции: 
-* Установление STOMP соединения
-* Подписка на события
+#### Supported operations:
 
-#### Использование:
- 
- Для того, чтобы начать использование STOMP-клиента необходимо:
- 1. Задать путь для установления подключения
- 2. Создать Stomp-client используя токен или используя пользовательский Dial
- 3. Задать канал получения фреймов
- 
-#### Пример
+* Establishing a STOMP connection
+* Subscribing to events
 
-Для подключения к Watch API Tenant-Manager'а, работающего по протоколу STOMP имеющий путь:
+#### Usage:
+
+To start using the STOMP client:
+
+1. Define the connection URL
+2. Create the STOMP client using either a token or a custom Dial
+3. Define a channel to receive frames
+
+#### Example
+
+To connect to the Watch API of Tenant-Manager, which uses the STOMP protocol and has the following URL:
+
 ```
 ws://tenant-manager:8080/api/v3/tenant-manager/watch
 ```
 
-#### Создаем STOMP-клиент
-##### C использованием токена
-```
-token, _ := tenantWatchClient.Сredential.GetAuthToken()
+#### Creating the STOMP client
+
+##### Using a token
+
+```go
+token, _ := tenantWatchClient.Credential.GetAuthToken()
 url, _ := url.Parse("ws://localhost:8080/api/v3/tenant-manager/watch")
 stompClient, _ := go_stomp_websocket.ConnectWithToken(*url, token)
 ```
 
-##### C пользовательским Dial
-```
+##### Using a custom Dial
+
+```go
 type ConnectionDialer interface {
     Dial(webSocketURL url.URL, dialer websocket.Dialer, requestHeaders http.Header) (*websocket.Conn, *http.Response, error)
 }
 ```
-```
+
+```go
 url, _ := url.Parse("ws://localhost:8080/api/v3/tenant-manager/watch")
 dialer := websocket.Dialer{}
-//конфигурация dialer
-requestHeaders http.Header{}
-//добавление хейдеров
-connDial ConnectionDialerImpl{} //имлементирует метод Dial интерфейса ConnectionDialer 
+// configure the dialer
+requestHeaders := http.Header{}
+// add headers
+connDial := ConnectionDialerImpl{} // implements the Dial method of ConnectionDialer interface
 stompClient, _ := go_stomp_websocket.Connect(*url, dialer, requestHeaders, connDial)
 ```
 
-Подписываемся на события
-```
-subscr, _ := stompClient.Subscribe("/tenant-changed") 
+Subscribe to events:
+
+```go
+subscr, _ := stompClient.Subscribe("/tenant-changed")
 ```
 
-Реагируем на получаемые фреймы
-```
+Handle received frames:
+
+```go
 go func() {
     for {
         var tenant = new(tenant.Tenant)
-        frame := <-subscr.FrameCh // Получаем фрейм
+        frame := <-subscr.FrameCh // Receive frame
         if len(frame.Body) > 0 {
-            err := json.Unmarshal([]byte(frame.Body), tenant) // Преобразуем тело фрейма в структуру Tenant
+            err := json.Unmarshal([]byte(frame.Body), tenant) // Parse the frame body into Tenant structure
             if err != nil {
                 fmt.Println(err)
             } else {
