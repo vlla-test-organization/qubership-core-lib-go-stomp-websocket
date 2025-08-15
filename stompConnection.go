@@ -10,7 +10,7 @@ import (
 
 	"github.com/google/uuid"
 	"github.com/gorilla/websocket"
-	"github.com/netcracker/qubership-core-lib-go/v3/logging"
+	"github.com/vlla-test-organization/qubership-core-lib-go/v3/logging"
 )
 
 var logger = logging.GetLogger("stomp")
